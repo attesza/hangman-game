@@ -1,38 +1,15 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+  .homeButton {
+    @apply  py-2 p-4 w-1/5 text-center text-[#6A6866] shadow-md mb-2 mt-2 first-letter:capitalize text-xl   transition-all hover:bg-[#00ADEE] hover:text-white
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .letsPlay {
+    @apply  py-2 p-4 w-1/5 text-center text-white bg-[#00ADEE]  mb-2 mt-2 first-letter:capitalize text-xl   transition-all hover:bg-[#00ADEE] hover:text-white
   }
-  to {
-    transform: rotate(360deg);
+
+  .alphabetsButton{
+    @apply  py-2    text-center text-[#6A6866] border border-[#959595]  first-letter:capitalize text-[14px]   transition-all hover:bg-[#00ADEE] hover:text-white
   }
 }
