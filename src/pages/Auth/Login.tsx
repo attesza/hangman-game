@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import {userLogin} from "../../redux/authActions";
 import {useForm} from "react-hook-form";
-
+import {Navigate} from "react-router-dom";
 
 
 // interface LoginData {
@@ -14,8 +14,7 @@ function Login() {
     // const { token} = useSelector((state: RootState) => state.auth)
     const dispatch = useDispatch<any>();
     const {register, handleSubmit} = useForm()
-
-    const submitForm = (data:any) => {
+    const submitForm = (data: any) => {
         // @ts-ignore
         dispatch(userLogin(data))
     }
@@ -23,6 +22,7 @@ function Login() {
     return (
         <div
             className='flex flex-row items-center justify-center h-screen bg-gradient-to-r from-[#00ADEE] to-[#009ad5]'>
+
             <div className='flex flex-row rounded-md w-[50%] h-[70%] mx-auto bg-[#fbfbfb]'>
                 <div className='flex flex-col p-16 sm:p-8 w-1/2 h-full items-center justify-around'>
                     <h1 className='first-letter:capitalize lg:text-3xl sm:text-xl font-semibold text-[#6A6866] '>Hangman
@@ -41,7 +41,7 @@ function Login() {
                         <input type="password"  {...register('password')}
                                className="bg-white shadow mt-2 mb-2 text-gray-900 text-sm rounded  focus:outline-[#00ADEE] border border-gray-100 focus:border border-[#243c5a] block  p-2.5   "
                                placeholder="email" value='password' required/>
-                        <input className='letsPlay mt-16 rounded w-1/2 cursor-pointer'  type="submit" value='login'
+                        <input className='letsPlay mt-16 rounded w-1/2 cursor-pointer' type="submit" value='login'
                                onClick={() => console.log('handle')}/>
                     </form>
                 </div>
