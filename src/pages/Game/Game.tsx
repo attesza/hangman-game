@@ -1,8 +1,17 @@
-import React, { useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Figure from "../../components/Figure";
+import {getWords, newGame} from "../../services/wordService";
 
 function Game() {
     const word = "TESZT";
+
+    const handleGame = () => {
+        newGame({level: 1}).then(res => {
+            console.log('ez a res', res.data)
+        })
+    }
+
+
 
     const alphabets = ["A", "B", "C", "D", "E", "F", "G",
         "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
@@ -54,7 +63,7 @@ function Game() {
                             className='py-2 p-4 mr-2 rounded-md text-center text-[#739892] bg-white border border-[#739892]  mb-2 mt-2 uppercase text-l transition-all hover:bg-[#00ADEE] hover:text-white'>end
                             game
                         </button>
-                        <button
+                        <button onClick={()=>handleGame()}
                             className='py-2 p-4 ml-2 rounded-md text-center text-white bg-[#00ADEE]  mb-2 mt-2 uppercase text-l transition-all hover:bg-[#00ADEE] hover:text-white'>start
                             new game
                         </button>

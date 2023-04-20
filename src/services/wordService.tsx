@@ -9,3 +9,7 @@ export const getWords = () => {
 export const addWord = (data: any) =>{
     return axios.post(API_URL+"word",data, { headers: authHeader() });
 }
+
+export const newGame = (data: any) =>{
+    return axios.post(API_URL+"newGame",data, { headers: authHeader() });
+}
