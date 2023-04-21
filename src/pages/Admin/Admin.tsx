@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Resolver, SubmitHandler, useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {addWord, getWords} from "../../services/wordService";
 
 
@@ -7,14 +7,7 @@ type formValues = {
     word: string;
 }
 
-const resolver: Resolver<formValues> = async (values) => {
-    return {
-        values: values.word ? values : {},
-        errors: !values.word ? {
-            word: {type: 'required', message: "Required field"},
-        } : {},
-    }
-}
+
 
 interface WordsResponse {
     id: number;
@@ -30,26 +23,12 @@ function Admin() {
         fetchData()
     }, [])
 
-    const {register, handleSubmit, setError, formState: {errors}} = useForm<formValues>({resolver});
+    const {register, handleSubmit,  formState: {errors}} = useForm<formValues>({mode: 'onBlur'});
     const onSubmit: SubmitHandler<formValues> = data => {
-        // if (!data.word) {
-        //     setError("word")
-        // }
-        // if (data.word.length < 6) {
-        //     setError("minimum 6 character", {type: "min"})
-        // }
-        // if (data.word.length > 12) {
-        //     setError("maximum 12 character", {type: "max"})
-        // }
-        // if (words?.some(element => element.word === "data.word")) {
-        //     setError("This word has been added", {type: "validate"})
-        // }
         addWord(data).then(res => {
-            console.log(res.data);
             fetchData()
         })
     };
-
 
     return (
         <div className='flex flex-col h-[70%] bg-white scrollbar-thin w-[70%] p-16'>

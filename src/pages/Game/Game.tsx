@@ -1,75 +1,67 @@
 import React, {useEffect, useState} from 'react';
 import Figure from "../../components/Figure";
-import {getWords, newGame} from "../../services/wordService";
+import {newGame} from "../../services/wordService";
+import {useDispatch, useSelector} from "react-redux";
+import {initGame, tryCharacter} from "../../redux/gameActions";
+import {RootState} from "../../store/store";
+
 
 function Game() {
-    const word = "TESZT";
-
-    const handleGame = () => {
-        newGame({level: 1}).then(res => {
-            console.log('ez a res', res.data)
-        })
-    }
-
-
-
+    const {actualWord, wrongCounter,triedChar} = useSelector((state: RootState) => state.game)
+    const [maskedWord, setMaskedWord] = useState<string>();
+    const dispatch = useDispatch<any>();
     const alphabets = ["A", "B", "C", "D", "E", "F", "G",
         "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
         "S", "T", "U", "V", "W", "X", "Y", "Z"];
-    // const [guesses, setGuesses] = useState([] as any);
+    const handleGame = () => {
 
-    const [correctGuesses, setCorrectGuesses] = useState([] as any)
-    const maskedWord = word.split('').map(letter => correctGuesses.includes(letter) ? letter : "_").join(" ");
-    const [trying, setTrying] = useState(0)
+        newGame({level: 1}).then(res => {
+            dispatch(initGame(res.data))
+        })
+    }
 
-    // const guessWord = (alphabet:string)=>{
-    //     setGuesses({...guesses,alphabet})
-    //
-    // }
+    useEffect(() => {
+        setMaskedWord(actualWord.split('').map((letter: string) => letter !== '*' ? letter : "_").join(" "))
+    }, [actualWord]);
 
 
+    const handleTryChar = (alphabet: string) => {
+        dispatch(tryCharacter(alphabet))
+    }
     return (
         <div className='flex flex-col h-[70%] bg-white w-[70%] p-16'>
             <div className='flex flex-row h-full'>
                 <div className='w-3/5 flex flex-col   justify-between'>
                     <h1 className='first-letter:capitalize text-3xl font-semibold text-[#6A6866] '>Hangman Game</h1>
-                    {<h2 className='font-semibold text-2xl text-[#0f6d28]'>You've won!</h2>}
+                    {!actualWord.includes('*') && wrongCounter < actualWord.length &&
+                        <h2 className='font-semibold text-2xl text-[#0f6d28]'>You've won!</h2>}
                     <p className='text-5xl '>{maskedWord}</p>
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-2 md:gap-4 lg:gap-6 p-5'>
                         {alphabets
-                            .map((alphabet, index) =>
-                                <button onClick={() => {
-                                    if (word.includes(alphabet)) {
-                                        setCorrectGuesses([...correctGuesses, alphabet])
-                                    } else {
-                                        setTrying((prevState) => prevState + 1)
-                                    }
-                                }} className='alphabetsButton' key={index}>{alphabet}</button>)}
+                            .map((alphabet, index) => {
+                                return (
+                                    <button disabled={!!triedChar.includes(alphabet.toLowerCase())}
+                                            onClick={() => handleTryChar(alphabet)}
+                                            className='alphabetsButton disabled:border-[#DEDEDE] disabled:text-[#DEDEDE] disabled:hover:bg-white disabled:hover:cursor-not-allowed'
+                                            key={index}>{alphabet}</button>)
+                            })}
                     </div>
-                    {/*<div className='grid grid-cols-12 gap-2'>*/}
-                    {/*    {alphabets*/}
-                    {/*        .map((alphabet, index) =>*/}
-                    {/*            <button onClick={() => {*/}
-                    {/*                if (word.includes(alphabet)) {*/}
-                    {/*                    setCorrectGuesses([...correctGuesses, alphabet])*/}
-                    {/*                } else {*/}
-                    {/*                    setTrying((prevState) => prevState + 1)*/}
-                    {/*                }*/}
-                    {/*            }} className='alphabetsButton' key={index}>{alphabet}</button>)}*/}
-                    {/*</div>*/}
-                    <h1 className='text-[#231d1b]'>Remaining possibility of failure: <span className='font-semibold'>3</span></h1>
+                    {actualWord && <h1 className='text-[#231d1b]'>Remaining possibility of failure: <span
+                        className='font-semibold'>{(actualWord.length - 1) - wrongCounter}</span></h1>}
                     <div>
                         <button
                             className='py-2 p-4 mr-2 rounded-md text-center text-[#739892] bg-white border border-[#739892]  mb-2 mt-2 uppercase text-l transition-all hover:bg-[#00ADEE] hover:text-white'>end
                             game
                         </button>
-                        <button onClick={()=>handleGame()}
-                            className='py-2 p-4 ml-2 rounded-md text-center text-white bg-[#00ADEE]  mb-2 mt-2 uppercase text-l transition-all hover:bg-[#00ADEE] hover:text-white'>start
+                        <button disabled={(actualWord.length - 1) - wrongCounter === 0} onClick={() => handleGame()}
+                                className='py-2 p-4 ml-2 rounded-md text-center text-white bg-[#00ADEE]  mb-2 mt-2 uppercase text-l transition-all hover:bg-[#00ADEE] hover:text-white'>start
                             new game
                         </button>
                     </div>
                 </div>
-                <div className='w-2/5 flex scale-y-150	 -scale-x-150  items-center justify-center'><Figure wrongLetters={trying}/></div>
+                <div className='w-2/5 flex scale-y-150	  items-center justify-center'><Figure
+                    wrongLetters={wrongCounter ? wrongCounter : 0}/></div>
+
             </div>
 
         </div>

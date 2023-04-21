@@ -1,17 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch} from "react-redux";
 import {userLogin} from "../../redux/authActions";
 import {useForm} from "react-hook-form";
-import {Navigate} from "react-router-dom";
 
 
-// interface LoginData {
-//     email: string,
-//     password: string
-// }
 
 function Login() {
-    // const { token} = useSelector((state: RootState) => state.auth)
     const dispatch = useDispatch<any>();
     const {register, handleSubmit} = useForm()
     const submitForm = (data: any) => {
@@ -36,13 +30,12 @@ function Login() {
                     <h1 className='text-black font-bold capitalize pb-8'>login</h1>
                     <form onSubmit={handleSubmit(submitForm)}>
                         <input type="email"  {...register('email')}
-                               className="bg-white shadow mt-2 mb-2 text-gray-900 text-sm rounded  focus:outline-[#00ADEE] border border-gray-100 focus:border border-[#243c5a] block  p-2.5   "
+                               className="bg-white shadow mt-2 mb-2 text-gray-900 text-sm rounded  focus:outline-[#00ADEE] border  focus:border border-[#243c5a] block  p-2.5   "
                                placeholder="email" value='john@doe.com' required/>
                         <input type="password"  {...register('password')}
-                               className="bg-white shadow mt-2 mb-2 text-gray-900 text-sm rounded  focus:outline-[#00ADEE] border border-gray-100 focus:border border-[#243c5a] block  p-2.5   "
+                               className="bg-white shadow mt-2 mb-2 text-gray-900 text-sm rounded  focus:outline-[#00ADEE] border  focus:border border-[#243c5a] block  p-2.5   "
                                placeholder="email" value='password' required/>
-                        <input className='letsPlay mt-16 rounded w-1/2 cursor-pointer' type="submit" value='login'
-                               onClick={() => console.log('handle')}/>
+                        <input className='letsPlay mt-16 rounded w-1/2 cursor-pointer' type="submit" value='login' />
                     </form>
                 </div>
             </div>

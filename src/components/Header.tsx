@@ -1,16 +1,17 @@
 import React, {useCallback, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../store/store";
+import {useSelector} from "react-redux";
+import {RootState, useAppDispatch} from "../store/store";
 import {userLogout} from "../redux/authActions";
 import {useNavigate} from 'react-router-dom';
 
 function Header() {
     const user = useSelector((state: RootState) => state.auth)
-    const dispatch = useDispatch<any>();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const handleLogout = useCallback(() => {
         dispatch(userLogout)
+        navigate('/')
         window.location.reload();
 
     }, [dispatch]);
