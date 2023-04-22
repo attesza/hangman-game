@@ -5,7 +5,7 @@ import {initGame, stateAllCharacter, tryCharacter} from "./gameActions";
 const initialState = {
     wrongCounter: 0,
     actualWord: '',
-    triedChar: [] as any
+    triedCharacter:'',
 }
 
 const gameSlice = createSlice({
@@ -16,15 +16,13 @@ const gameSlice = createSlice({
         builder.addCase(tryCharacter.fulfilled, (state, {payload}) => {
             state.wrongCounter = payload.data.wrongCounter
             state.actualWord = payload.data.actualWord
+            state.triedCharacter = payload.data.triedCharacter
         });
         builder.addCase(initGame.fulfilled, (state, {payload}) => {
             state.wrongCounter = payload.wrongCounter
             state.actualWord = payload.actualWord
         })
-        builder.addCase(stateAllCharacter.fulfilled, (state,{payload})=>{
-            state.triedChar.push(payload);
-            // state.triedChar = payload
-        })
+
     }
 })
 export default gameSlice.reducer

@@ -5,8 +5,7 @@ import {tryChar} from "../services/wordService";
 
 export const tryCharacter = createAsyncThunk(
     'game/tryChar',
-    async ( char: string, {rejectWithValue,dispatch}) => {
-        dispatch(stateAllCharacter(char))
+    async ( char: string, {rejectWithValue}) => {
         return tryChar(char.toLowerCase())
     }
 )

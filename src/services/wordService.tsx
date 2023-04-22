@@ -18,6 +18,7 @@ export const newGame = (data: any) => {
 interface PlayResponse {
     actualWord: string,
     wrongCounter: number,
+    triedCharacter: string
 }
 
 export const tryChar = (char: string) => {

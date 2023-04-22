@@ -7,7 +7,7 @@ import {RootState} from "../../store/store";
 
 
 function Game() {
-    const {actualWord, wrongCounter,triedChar} = useSelector((state: RootState) => state.game)
+    const {actualWord, wrongCounter,triedCharacter} = useSelector((state: RootState) => state.game)
     const [maskedWord, setMaskedWord] = useState<string>();
     const dispatch = useDispatch<any>();
     const alphabets = ["A", "B", "C", "D", "E", "F", "G",
@@ -40,7 +40,7 @@ function Game() {
                         {alphabets
                             .map((alphabet, index) => {
                                 return (
-                                    <button disabled={!!triedChar.includes(alphabet.toLowerCase())}
+                                    <button disabled={!!triedCharacter.includes(alphabet.toLowerCase())||(actualWord.length - 1) - wrongCounter === 0}
                                             onClick={() => handleTryChar(alphabet)}
                                             className='alphabetsButton disabled:border-[#DEDEDE] disabled:text-[#DEDEDE] disabled:hover:bg-white disabled:hover:cursor-not-allowed'
                                             key={index}>{alphabet}</button>)
