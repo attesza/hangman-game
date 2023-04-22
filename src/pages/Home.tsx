@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {SubmitHandler, useForm} from "react-hook-form";
-import {newGame} from "../services/wordService";
 import {initGame} from "../redux/gameActions";
 import {useDispatch} from "react-redux";
+import {hasActiveGame, newGame} from "../services/gameServices";
 
 type FormValues = {
     level: number;
@@ -13,6 +13,16 @@ function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch<any>();
     const {handleSubmit, setValue} = useForm<FormValues>();
+
+    useEffect(() => {
+        hasActiveGame().then(res => {
+            if (res.data) {
+                navigate('/game',{state:{hasActiveGame: res.data}})
+            }
+        })
+    }, []);
+
+
     const onSubmit: SubmitHandler<FormValues> = data => {
         newGame(data).then(res => {
             dispatch(initGame(res.data))

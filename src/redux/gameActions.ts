@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
-import {tryChar} from "../services/wordService";
+import {tryChar} from "../services/gameServices";
 
 
 

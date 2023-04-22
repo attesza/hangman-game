@@ -30,6 +30,7 @@ function Header() {
                  src={require('../assets/029-Attrecto_logo.png')}
                  alt=""/>
             <div className='flex flex-row items-center'>
+                <button className='text-2xl uppercase text-[#6A6866]' onClick={() => navigate('/top')}>Top10</button>
                 <button className='text-2xl uppercase text-[#6A6866]' onClick={() => navigate('/admin')}>Admin</button>
                 <button className='text-2xl uppercase ml-3 text-[#6A6866]' onClick={handleLogout}>Logout</button>
                 <div className='flex flex-row justify-center items-center ml-12'>

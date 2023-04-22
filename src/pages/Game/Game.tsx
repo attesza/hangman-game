@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import Figure from "../../components/Figure";
-import {stopGame} from "../../services/wordService";
 import {useDispatch, useSelector} from "react-redux";
-import {tryCharacter} from "../../redux/gameActions";
+import {initGame, tryCharacter} from "../../redux/gameActions";
 import {RootState} from "../../store/store";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {continueGame, stopGame} from "../../services/gameServices";
 
+type Props = {
+    hasActiveGame: boolean
+}
 
 function Game() {
+    const params = useParams();
+    const location = useLocation();
     const {actualWord, wrongCounter, triedCharacter, gameState} = useSelector((state: RootState) => state.game)
     const [maskedWord, setMaskedWord] = useState<string>();
     const navigate = useNavigate();
@@ -15,6 +20,14 @@ function Game() {
     const alphabets = ["A", "B", "C", "D", "E", "F", "G",
         "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
         "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+    useEffect(() => {
+        if (location && location.state &&location.state.hasActiveGame) {
+            continueGame().then(res=>{
+                dispatch(initGame(res.data))
+            })
+        }
+    }, [dispatch, location]);
 
 
     useEffect(() => {

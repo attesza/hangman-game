@@ -3,14 +3,6 @@ import authHeader from "../lib/axios";
 
 const API_URL = "http://localhost:8080/api/v1/";
 
-
-export const getWords = () => {
-    return axios.get(API_URL + "words", {headers: authHeader()});
-};
-export const addWord = (data: any) => {
-    return axios.post(API_URL + "word", data, {headers: authHeader()});
-}
-
 export const newGame = (data: any) => {
     return axios.post(API_URL + "newGame", data, {headers: authHeader()});
 }
@@ -28,4 +20,15 @@ interface PlayResponse {
 
 export const tryChar = (char: string) => {
     return axios.post<PlayResponse>(API_URL + `tryChar?char=${char}`, null, {headers: authHeader()});
+}
+
+export const hasActiveGame = () => {
+    return axios.get(API_URL + "hasActiveGame", {headers: authHeader()});
+}
+export const continueGame = () => {
+    return axios.post(API_URL + "continueGame", null, {headers: authHeader()});
+}
+
+export const getTop = ()=>{
+    return axios.get(API_URL+"topTen");
 }
