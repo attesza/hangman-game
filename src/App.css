@@ -3,7 +3,7 @@
 @tailwind utilities;
 @layer components {
   .homeButton {
-    @apply  py-2 p-4 w-1/5 text-center text-[#6A6866] shadow-md mb-2 mt-2 first-letter:capitalize text-xl   transition-all hover:bg-[#00ADEE] hover:text-white
+    @apply  py-2 p-4 w-1/5 text-center text-[#6A6866] shadow-md mb-2 mt-2  text-xl cursor-pointer  transition-all hover:bg-[#00ADEE] hover:text-white
   }
   .letsPlay {
     @apply  py-2 p-4 w-1/5 text-center text-white bg-[#00ADEE]  mb-2 mt-2 first-letter:capitalize text-xl   transition-all hover:bg-[#00ADEE] hover:text-white
@@ -11,5 +11,8 @@
 
   .alphabetsButton{
     @apply  py-2    text-center text-[#6A6866] border border-[#959595]  first-letter:capitalize text-[14px]   transition-all hover:bg-[#00ADEE] hover:text-white
+  }
+  .levelSelectButton{
+    @apply inline-flex items-center justify-between w-1/5  mb-2 mt-2  p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100
   }
 }

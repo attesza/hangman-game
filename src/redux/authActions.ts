@@ -1,15 +1,13 @@
 import axios from 'axios'
 import {createAsyncThunk} from '@reduxjs/toolkit'
-import jwtDecode from "jwt-decode";
+import {getUserData} from "../services/userServices";
 
 const backendURL = 'http://localhost:8080'
 type Credentials = {
     email: string,
     password: string
 }
-type JwtPayload = {
-    sub: string;
-}
+
 export const userLogin = createAsyncThunk(
     'auth/login',
     async ({email, password}: Credentials, {rejectWithValue}) => {
@@ -24,9 +22,10 @@ export const userLogin = createAsyncThunk(
                 {email, password},
                 config
             )
+
+            // const decodedJwt = jwtDecode<JwtPayload>(data.token);
             localStorage.setItem('userToken', data.token)
-            const decodedJwt = jwtDecode<JwtPayload>(data.token);
-            localStorage.setItem('userInfo', JSON.stringify({email: decodedJwt.sub}))
+
 
             return data
         } catch (error) {
@@ -41,6 +40,16 @@ export const userLogin = createAsyncThunk(
         }
     }
 )
+
+export const getUserInfo= createAsyncThunk(
+    'auth/getUserInfo',
+    async ( ) => {
+        const {data} = await getUserData();
+        localStorage.setItem('userInfo',JSON.stringify(data))
+        return data;
+    }
+)
+
 export const userLogout = () => {
     localStorage.removeItem("userToken");
     localStorage.removeItem('userInfo')

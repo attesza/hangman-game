@@ -21,7 +21,7 @@ function Layout() {
                 window.location.reload();
             }
         }
-    }, [location]);
+    }, [dispatch, location, navigate, token]);
 
     return (
         <>

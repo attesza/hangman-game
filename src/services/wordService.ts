@@ -15,9 +15,14 @@ export const newGame = (data: any) => {
     return axios.post(API_URL + "newGame", data, {headers: authHeader()});
 }
 
+export const stopGame = () => {
+    return axios.post(API_URL + "stopGame", null, {headers: authHeader()})
+}
+
 interface PlayResponse {
     actualWord: string,
     wrongCounter: number,
+    gameState: string,
     triedCharacter: string
 }
 

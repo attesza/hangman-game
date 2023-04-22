@@ -34,7 +34,7 @@ function Login() {
                                placeholder="email" value='john@doe.com' required/>
                         <input type="password"  {...register('password')}
                                className="bg-white shadow mt-2 mb-2 text-gray-900 text-sm rounded  focus:outline-[#00ADEE] border  focus:border border-[#243c5a] block  p-2.5   "
-                               placeholder="email" value='password' required/>
+                               placeholder="email" required/>
                         <input className='letsPlay mt-16 rounded w-1/2 cursor-pointer' type="submit" value='login' />
                     </form>
                 </div>
