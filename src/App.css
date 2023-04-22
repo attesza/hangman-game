@@ -2,17 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 @layer components {
-  .homeButton {
-    @apply  py-2 p-4 w-1/5 text-center text-[#6A6866] shadow-md mb-2 mt-2  text-xl cursor-pointer  transition-all hover:bg-[#00ADEE] hover:text-white
-  }
-  .letsPlay {
-    @apply  py-2 p-4 w-1/5 text-center text-white bg-[#00ADEE]  mb-2 mt-2 first-letter:capitalize text-xl   transition-all hover:bg-[#00ADEE] hover:text-white
-  }
+    .navBarButton {
+        @apply text-lg uppercase transform    transition duration-500 hover:scale-110 ml-3 text-[#6A6866]
+    }
 
-  .alphabetsButton{
-    @apply  py-2    text-center text-[#6A6866] border border-[#959595]  first-letter:capitalize text-[14px]   transition-all hover:bg-[#00ADEE] hover:text-white
-  }
-  .levelSelectButton{
-    @apply inline-flex items-center justify-between w-1/5  mb-2 mt-2  p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100
-  }
+    .homeButton {
+        @apply py-2 p-4 w-1/5 text-center text-[#6A6866] shadow-md mb-2 mt-2  text-xl cursor-pointer  transition-all hover:bg-[#00ADEE] hover:text-white
+    }
+
+    .letsPlay {
+        @apply py-2 rounded-lg p-4 lg:max-w-lg w-1/2 text-center text-white bg-[#00ADEE]  mb-2 mt-2 first-letter:capitalize text-xl   transition-all hover:bg-[#00ADEE] hover:text-white
+    }
+
+    .alphabetsButton {
+        @apply text-center text-[#6A6866] border border-[#959595] md:w-6 md:h-8 sm:w-2 first-letter:capitalize text-lg  transition-all hover:bg-[#00ADEE] hover:text-white
+    }
+
+    .levelSelectButton {
+        @apply inline-flex items-center lg:max-w-lg w-1/2  mb-2 mt-2  p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100
+    }
 }

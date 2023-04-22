@@ -26,7 +26,7 @@ function Layout() {
     return (
         <>
             <Header/>
-            <div className='flex h-screen justify-center items-center mx-auto bg-[#fbfbfb]'><Outlet/></div>
+            <div className='flex  pl-6 pr-6  sm:h-screen justify-center items-center mx-auto bg-[#fbfbfb]'><Outlet /></div>
         </>
     );
 }

@@ -10,7 +10,7 @@ const svgElementsStyle: any = {
 
 function Figure(props: Props) {
     return (
-        <svg height="250" width="200">
+        <svg style={{transform: 'scaleX(-1)'}} height="250" width="200">
             <line style={svgElementsStyle} x1="60" y1="20" x2="140" y2="20"/>
             <line style={svgElementsStyle} x1="140" y1="20" x2="140" y2="50"/>
             <line style={svgElementsStyle} x1="60" y1="20" x2="60" y2="230"/>

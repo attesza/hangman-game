@@ -42,10 +42,10 @@ function Admin() {
         }
     }, [word, words]);
     return (
-        <div className='flex flex-col h-[70%] bg-white scrollbar-thin w-[70%] p-16'>
+        <div className='flex flex-col sm:p-20  space-y-10 bg-white  justify-center  text-center'>
             <h1 className='first-letter:capitalize text-3xl font-semibold text-[#6A6866] text-center mb-10'>Admin</h1>
-            <div className='flex flex-row relative min-h-0  flex -mx-4 sm:-mx-6 md:mx-0'>
-                <div className='w-2/5 flex flex-col items-center  max-h-[70%] justify-between'>
+            <div className='flex flex-col sm:flex-row sm:flex-wrap sm:justify-center max-h-screen overflow-x-auto'>
+                <div className=' flex flex-col items-center   justify-between'>
                     <span>Type the word you want to add to the list</span>
                     <form className='flex flex-col w-full items-center' onSubmit={handleSubmit(onSubmit)}>
                         <input type="text" id="new_word"
@@ -85,19 +85,22 @@ function Admin() {
                             <span className="sr-only">Info</span>
                             <span className="font-medium">{errors.word?.message}</span>
                         </div>)}
-                        <input className='letsPlay rounded w-1/2 disabled:bg-gray-400' disabled={includeWordError|| errors.word?.message!=null} type="submit"/>
+                        <input className='letsPlay rounded w-1/2 disabled:bg-gray-400'
+                               disabled={includeWordError || errors.word?.message != null} type="submit"/>
                         <button
-                                className='w-1/2 rounded mt-2 mb-2 border border-[#00ADEE] p-2.5 text-[#00ADEE] '
-                                onClick={() => navigate(-1)}>back
+                            className='w-1/2 rounded mt-2 mb-2 border border-[#00ADEE] p-2.5 text-[#00ADEE] '
+                            onClick={() => navigate(-1)}>back
                         </button>
                     </form>
                 </div>
                 <div
-                    className='flex flex-col w-3/5 scrollbar-thin p-6 scrollbar-thumb-[#00ADEE] scrollbar-track-gray-100 overflow-x-auto'>
-                    <div className='grid grid-cols-4 gap-4'>
-                        {words && words.map(({word, id}) => <span key={id}>{word}</span>)}
+                    className=' md:flex scrollbar-thin p-6 scrollbar-thumb-[#00ADEE] scrollbar-track-gray-100 max-h-screen  overflow-x-auto'>
+                    <div className='grid lg:grid-cols-4 lg:grid-gap-4 md:grid-cols-3 md:gap-3 sm:grid-cols-2 sm:gap-2 '>
+                        {words && words.map(({word, id}) => <span className='truncate text-ellipsis'
+                                                                  key={id}>{word}</span>)}
                     </div>
                 </div>
+
             </div>
         </div>
     );

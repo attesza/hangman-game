@@ -17,7 +17,7 @@ function Home() {
     useEffect(() => {
         hasActiveGame().then(res => {
             if (res.data) {
-                navigate('/game',{state:{hasActiveGame: res.data}})
+                navigate('/game', {state: {hasActiveGame: res.data}})
             }
         })
     }, []);
@@ -31,8 +31,8 @@ function Home() {
     };
     return (
         <>
-            <div className='flex space-y-10 bg-white h-[50%] justify-center w-[50%] flex-col text-center'>
-                <h1 className='first-letter:capitalize text-6xl font-semibold text-[#6A6866] '>Hangman Game</h1>
+            <div className='flex flex-col md:p-40 md:pt-64 sm:p-20 w-full space-y-10  justify-center  text-center'>
+                <h1 className='first-letter:capitalize text-4xl font-semibold text-[#6A6866] '>Hangman Game</h1>
                 <span className='text-[#6A6866] text-lg '>Choose a difficulty level</span>
                 <div className='flex flex-col  items-center'>
                     <form className='flex flex-col  w-full items-center' onSubmit={handleSubmit(onSubmit)}>
