@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "../lib/axios";
+import {API_URL} from "./config";
 
-const API_URL = "http://localhost:8080/api/v1/";
 
 export const newGame = (data: any) => {
     return axios.post(API_URL + "newGame", data, {headers: authHeader()});
