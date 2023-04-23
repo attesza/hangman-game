@@ -3,15 +3,12 @@ import Figure from "../../components/Figure";
 import {useDispatch, useSelector} from "react-redux";
 import {initGame, tryCharacter} from "../../redux/gameActions";
 import {RootState} from "../../store/store";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {continueGame, stopGame} from "../../services/gameServices";
 
-type Props = {
-    hasActiveGame: boolean
-}
+
 
 function Game() {
-    const params = useParams();
     const location = useLocation();
     const {actualWord, wrongCounter, triedCharacter, gameState} = useSelector((state: RootState) => state.game)
     const [maskedWord, setMaskedWord] = useState<string>();
@@ -66,10 +63,11 @@ function Game() {
                 {actualWord && <h1 className='text-[#231d1b]'>Remaining possibility of failure: <span
                     className='font-semibold'>{6 - wrongCounter}</span></h1>}
                 <div>
+                    {gameState==='ACTIVE'&&(
                     <button onClick={handleEndGame}
                             className='py-2 p-4 mr-2 rounded-md text-center text-[#739892] bg-white border border-[#739892]  mb-2 mt-2 uppercase text-l transition-all hover:bg-[#00ADEE] hover:text-white'>end
                         game
-                    </button>
+                    </button>)}
                     {gameState !== 'ACTIVE' && (
                         <button
                             onClick={() => navigate('/')}

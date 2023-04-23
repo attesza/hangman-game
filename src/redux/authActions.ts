@@ -30,10 +30,11 @@ export const userLogin = createAsyncThunk(
             return data
         } catch (error) {
             if (axios.isAxiosError(error)) {
+                console.log(error)
                 if (error.response && error.response.data.message) {
                     return rejectWithValue(error.response.data.message)
                 } else {
-                    return rejectWithValue(error.message)
+                    return rejectWithValue({message: error.message , status: error.response})
                 }
             }
             return rejectWithValue(error);
